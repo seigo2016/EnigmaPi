@@ -7,24 +7,16 @@ from digitalio import Direction, Pull
 
 i2c = busio.I2C(board.SCL, board.SDA)
 mcp = MCP23017(i2c)
-#pin2 = mcp.get_pin(2)
-#pin6 = mcp.get_pin(6)
-#pin6.switch_to_output(value=False)
-#pin2.direction = Direction.OUTPUT
-#pin6.direction = Direction.INPUT
-#pin6.value= False
-#pin2.value = True
 pin_all = []
-#print(pin6.value)
-for i in range(8):
+for i in range(8): # GPIOA (片側8ピンのみテスト中)
     pin = mcp.get_pin(i)
     pin_all.append(pin)
 
 for i in range(8):
-    pin = pin_all[i]
-    pin.switch_to_output(value=True)
-    pin.direction = Direction.OUTPUT
-    pin.value=True
+    src_pin = pin_all[i]
+    src_pin.switch_to_output(value=True)
+    src_pin.direction = Direction.OUTPUT
+    src_pin.value=True
     for j in range(8):
         if i==j:
             continue
@@ -33,7 +25,6 @@ for i in range(8):
         pin_all[j].value = False
         if pin_all[j].value:
             print(i, j)
-    pin.switch_to_output(value=False)
-    pin.direction = Direction.INPUT
-    pin.value=False
-
+    src_pin.switch_to_output(value=False)
+    src_pin.direction = Direction.INPUT
+    src_pin.value=False
