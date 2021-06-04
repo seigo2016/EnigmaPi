@@ -1,7 +1,5 @@
 import random
-import itertools
 from typing import List
-import readchar
 import time
 import board
 import busio
@@ -16,10 +14,9 @@ i2c = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1015(i2c)
 
 channels = [None, None, None]
-channels = [None, None]
-channels[0] = AnalogIn(ads, ADS.P0) # A-K + enter
-channels[1] = AnalogIn(ads, ADS.P1) # Q-O
-#channels[2] = AnalogIn(ads, ADS.P2) # P-L
+channels[0] = AnalogIn(ads, ADS.P1) # Q-O
+channels[1] = AnalogIn(ads, ADS.P0) # A-K + enter
+channels[2] = AnalogIn(ads, ADS.P2) # P-L
 
 def make_rotor(seed1=0, seed2=0, seed3=0, order=0) -> List[List]:
     scrumblers:List = [None,None,None]
@@ -46,7 +43,7 @@ def detect_key(chan_i, key) -> str:
                 ["A", "S", "D", "F", "G", "H", "J", "K", "enter"],
                 ["P", "Y", "X", "C", "V", "B", "N", "M", "L"]
                 ]
-    print(key_list[chan_i][key])
+    # print(key_list[chan_i][key])
     return key
 
 def detect_switch():
@@ -54,19 +51,15 @@ def detect_switch():
     threshold:List[int] = [2300, 5148, 8028, 11372, 14668, 18156, 21212, 24060, 26180]
     key = (-1, -1)
     while True:
-        ### 電圧入力をチェックする処理
+        ### 入力をチェックする処理
         for chan_i, chan in enumerate(channels):
-#            print(chan_i, chan.value)
             value = chan.value
-            prev_key = key
-            #print(prev_key)
             for i, t in enumerate(threshold):
                 if t > value:
                     key = (chan_i, i)
                     break
                 else:
                     key = (-1, -1)
-#            if prev_key[1] != -1 and key == prev_key:
             if key[0] != -1:
                 time.sleep(0.3)
                 return detect_key(chan_i, key[1])
@@ -97,14 +90,8 @@ def main() -> str:
 
     # 平文入力
     while True:
-        # plain_text:str = input(">")
-        # plain_char:str = readchar.readkey()
-
-        # plain_char = plain_char.lower()
-
         plain_char = detect_switch()
-        #print(plain_char)
-        continue
+        print(plain_char)
         plain_index = alphabet.index(plain_char)
         # 回転の反映
         now_scrumbler_1:List[int] = scrumbler_1[roter_1_index:] + scrumbler_1[:roter_1_index]
@@ -137,4 +124,4 @@ def main() -> str:
         print(result_char)
         print(result_all)
 
-print(main())
+main()
