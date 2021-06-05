@@ -1,3 +1,3 @@
 {
-    "python.pythonPath": "enigma/bin/python3"
+    "python.pythonPath": "src/enigma/bin/python"
 }
