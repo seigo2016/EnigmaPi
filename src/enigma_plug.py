@@ -16,18 +16,16 @@ class EnigmaPlug:
     def get_pin_state(self):
         for i in range(8):
             src_pin = self.pin_all[i]
-            # src_pin.switch_to_output(value=True)
-            src_pin.direction = Direction.OUTPUT
-            src_pin.value=True
+            src_pin.switch_to_output(value=True)
             for j in range(8):
                 if i==j:
                     continue
-                # self.pin_all[j].switch_to_output(value=False)
                 self.pin_all[j].direction = Direction.INPUT
-                self.pin_all[j].value = False
                 if self.pin_all[j].value:
                     self.pin_pair.append((i, j))
-            # src_pin.switch_to_output(value=False)
+            src_pin.switch_to_output(value=False)
             src_pin.direction = Direction.INPUT
-            src_pin.value=False
         return self.pin_pair
+
+eng = EnigmaPlug()
+print(eng.get_pin_state())
