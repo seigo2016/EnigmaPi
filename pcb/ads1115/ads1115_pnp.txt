@@ -1,0 +1,26 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=ads1115
+*Date=22:45:58
+*CreatedBy=Fritzing 0.9.3b.04.19.5c895d327c44a3114e5fcc9d8260daf0cbb52806
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;THT;25.4;-17.267;0;Bottom;J
+2;;;2.44593;-2.26222;0;Bottom;Hole2
+3;;;2.44593;-32.6481;0;Bottom;Hole4
+4;;THT;13.97;-21.077;-90;Bottom;SDA
+5;;THT;20.32;-18.537;-90;Bottom;ADDR
+6;;THT;13.97;-28.697;-90;Bottom;VDD
+7;;THT;13.97;-26.157;-90;Bottom;GND
+8;;THT;13.97;-23.617;-90;Bottom;SCL
+9;;;49.9533;-32.6481;0;Bottom;Hole3
+10;;;39.6875;-17.267;90;Bottom;ADS1115
+11;;;49.9533;-2.26222;0;Bottom;Hole1
