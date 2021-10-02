@@ -12,7 +12,7 @@ def start():
         while True:
             # message = "Please enter any key to configure"
             # lcd_a.message = message
-            _ = readchar.readkey()
+            # _ = readchar.readkey()
             lcd_a.clear()
             lcd_a.message = "Start"
             time.sleep(3)
@@ -25,6 +25,7 @@ def start():
                 check_status.check()
             except check_status.I2CDeviceNotFoundError as e:  # 問題があればLCDに表示して再チェックを待つ
                 lcd_a.message = str(e)
+                time.sleep(10)
                 continue
 
             # モード切替を待つ
@@ -48,7 +49,7 @@ def start():
     #        lcd_a.message = "."
             lcd_a.cursor_position(0, 1)
             lcd_a.message = "Enigma Init OK"
-            time.sleep(3)
+            time.sleep(2)
             enigma = encrypt.Enigma(rotary_state, plug_state)
             lcd_a.clear()
             lcd_a.message = "Result"
